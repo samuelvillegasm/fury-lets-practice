@@ -48,4 +48,22 @@ public class ControllerExceptionHandler {
 		return ResponseEntity.status(apiError.getStatus())
 				.body(apiError);
 	}
+
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<ApiError> handleNotFoundException(NotFoundException notFoundException){
+		return ResponseEntity.status(404).body(new ApiError(
+				"Not found",
+				notFoundException.getMessage(),
+				404
+		));
+	}
+
+	@ExceptionHandler(InternalServerErrorException.class)
+	public ResponseEntity<ApiError> handleNotFoundException(InternalServerErrorException internalServerError){
+		return ResponseEntity.status(500).body(new ApiError(
+				"Not found",
+				internalServerError.getMessage(),
+				500
+		));
+	}
 }
